@@ -1,0 +1,69 @@
+version: 6
+name: rx101_stages
+
+model:
+  type: thunder_hammer.model.classification.easygold_ft.resnext101_32x8d_ft
+  num_classes: 54
+
+train_data:
+  type: src.dali_dataset.DaliLoader
+  batch_size: 256
+  workers: 6
+  crop_size: 224
+  color_twist: True
+  min_area: 0.2
+
+val_data:
+  type: src.dataset.HakunaPrefetchedLoader
+  batch_size: 32
+  workers: 12
+  long_side: 256
+
+
+mixup:
+  type: thunder_hammer.mixup.NoMixUp
+
+scheduler:
+  warmup_epoch: 1
+  warmup: True
+  period: 72
+
+sync_bn: True
+no_bn_weight_decay: False
+
+optimizer:
+  weight_decay: 0.0001
+
+freeze: 1
+
+stages:
+  stage2:
+    freeze: 1
+    train_data:
+      crop_size: 224
+      batch_size: 120
+    optimizer:
+      lr: 0.005
+    trainer:
+      max_epochs: 40
+    scheduler:
+      warmup_epoch: 3
+      period: 40
+
+  stage3:
+    freeze: 0
+    train_data:
+      crop_size: 224
+      batch_size: 96
+      color_twist: False
+    optimizer:
+      lr: 0.005
+    trainer:
+      max_epochs: 20
+    scheduler:
+      warmup_epoch: 1
+      period: 20
+
+
+weights: /mnt/ssd1/learning_dumps/wild/rx50_stages_2/weights_stage2/_ckpt_epoch_5.ckpt
+tta: mirror

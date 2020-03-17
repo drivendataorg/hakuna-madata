@@ -1,0 +1,10 @@
+/.build/script.py
+/data
+.idea/*
+*.pyc
+notebooks
+.mypy_cache
+.idea
+/*.egg-info
+/dist/
+build

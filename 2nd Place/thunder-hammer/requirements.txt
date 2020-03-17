@@ -1,0 +1,13 @@
+numpy>=1.16.4
+apex>=0.1
+pytorch_lightning==0.5.3
+nvidia_dali>=0.16.0
+matplotlib>=3.1.1
+opencv_python>=4.1.2.30
+pandas>=0.25.3
+# torchvision>=0.4.0
+tqdm>=4.41.1
+fire>=0.2.1
+pytorch_tools>=0.0.1
+addict>=2.2.1
+torch>=1.2.1

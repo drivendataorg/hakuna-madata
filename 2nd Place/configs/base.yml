@@ -1,0 +1,92 @@
+seed: 666
+loss_scale: 128.0
+name: base_model
+
+trainer:
+  type: pytorch_lightning.Trainer
+  early_stop_callback: False
+  default_save_path: ./
+  gpus: 2
+  use_amp: True
+  amp_level: O1
+  max_epochs: 100
+  weights_summary: top
+  distributed_backend: ddp
+  num_sanity_val_steps: 2
+  train_percent_check: 1.0
+  val_percent_check: 1.0
+
+model:
+  type: thunder_hammer.model.classification.resnet34
+
+train_data:
+  type: src.dali_dataset.DaliLoader
+  mode: train
+  path: "/mnt/ssd1/dataset/imagenet1k"
+  batch_size: 256
+  workers: 8
+  crop_size: 224
+#  long_side: 320
+  color_twist: True
+
+val_data:
+  type: src.dataset.HakunaPrefetchedLoader
+  mode: val
+  path: "/mnt/ssd1/dataset/imagenet1k"
+  batch_size: 32
+  workers: 8
+  crop_size: 224
+  long_side: 320
+  color_twist: True
+
+mixup:
+  type: thunder_hammer.mixup.NoMixUp
+
+optimizer:
+  type: torch.optim.SGD
+  lr: 0.6
+  weight_decay: 0.0001
+  momentum: 0.9
+
+scheduler:
+  type: thunder_hammer.scheduler.CosineWarmRestart
+  func: cosine_decay
+  warmup: True
+  warmup_epoch: 5
+  period: 100
+  min_lr: 0.0001
+  low_epoch: 1
+
+sync_bn: False
+no_bn_weight_decay: False
+
+checkpoint:
+  type: thunder_hammer.checkpoint.JustModelCheckpoint
+  monitor: val_loss
+  save_top_k: 3
+  mode: min
+  verbose: True
+
+logger:
+  type: thunder_hammer.logger.JustLogger
+
+
+loss:
+  type: thunder_hammer.loss.classification.smooth.MultiLabelSoftMarginLoss
+
+metrics:
+  - {type: thunder_hammer.metric.classification.accuracy.Accuracy, topk: 1}
+
+gpu_id: 0
+eval:
+  distributed: True
+
+data_test:
+  - {type: src.dataset.HakunaPrefetchedLoader}
+
+dump_path: /mnt/hdd1/learning_dumps
+
+resume_stage: False
+
+stages:
+  {}

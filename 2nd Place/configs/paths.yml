@@ -1,0 +1,36 @@
+n01z3-dl0:
+  val_data.path: /mnt/ssd3/dataset/wild
+  train_data.path: /mnt/ssd3/dataset/wild
+  dump_path: /mnt/hdd1/learning_dumps/wild
+
+n01z3-dl2:
+  train_data.path: /mnt/ssd2/dataset/wild
+  val_data.path: /mnt/ssd2/dataset/wild
+  dump_path: /mnt/hdd1/learning_dumps/wild
+
+n01z3-dl6:
+  train_data.path: /mnt/ssd1/dataset/wild
+  val_data.path: /mnt/ssd1/dataset/wild
+  dump_path: /mnt/ssd1/learning_dumps/wild
+
+n01z3-dl3:
+  train_data.path: /mnt/ssd1/dataset/wild
+  val_data.path: /mnt/ssd1/dataset/wild
+  dump_path: /mnt/ssd1/learning_dumps/wild
+
+mn-dgx01.x5.ru:
+  train_data.path: /raid/data_share/dataset/wild
+  val_data.path: /raid/data_share/dataset/wild
+  dump_path: /raid/data_share/dumps/wild
+
+n01z3-work:
+  train_data.path: /mnt/ssd1/dataset/wild
+  val_data.path: /mnt/ssd1/dataset/wild
+  dump_path: /mnt/hdd1/learning_dumps/wild
+
+#"docker": "docker",
+#"n01z3-extreme": "x1",
+#"n01z3-work": "work",
+#"n01z3-dl1": "dl1",
+#"n01z3-dl3": "dl3",
+#"n01z3-dl4": "dl4",

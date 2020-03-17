@@ -1,0 +1,72 @@
+version: 1
+name: rn34_stages
+
+model:
+  type: thunder_hammer.model.classification.resnet.resnet34
+  deep_stem: True
+  antialias: True
+
+data:
+  type: thunder_hammer.dataset.dali.DaliLoader
+  workers: 8
+  batch_size: 256
+  color_twist: True
+  filelist: 'tables'
+
+mixup:
+  type: thunder_hammer.mixup.CutMix
+
+scheduler:
+  warmup_epoch: 2
+  warmup: True
+  period: 72
+
+sync_bn: True
+no_bn_weight_decay: False
+
+optimizer:
+  weight_decay: 0.0001
+
+stages:
+  stage1:
+    data:
+      crop_size: 128
+    optimizer:
+      lr: 0.8
+    trainer:
+      max_epochs: 24
+    scheduler:
+      warmup_epoch: 5
+
+  stage2:
+    data:
+      crop_size: 192
+    optimizer:
+      lr: 0.5
+    trainer:
+      max_epochs: 24
+    scheduler:
+      period: 34
+
+  stage3:
+    data:
+      crop_size: 224
+    optimizer:
+      lr: 0.1
+    trainer:
+      max_epochs: 24
+    scheduler:
+      period: 24
+
+  stage4:
+    data:
+      crop_size: 224
+      min_area: 0.2
+      color_twist: False
+
+    optimizer:
+      lr: 0.01
+    trainer:
+      max_epochs: 12
+    scheduler:
+      period: 4

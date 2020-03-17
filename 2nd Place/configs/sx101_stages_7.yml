@@ -1,0 +1,67 @@
+version: 7
+name: rx101_stages
+
+model:
+  type: thunder_hammer.model.classification.timm_ft.effnet_ft
+  num_classes: 54
+#  pretrained: False
+#  weights: /raid/data_share/dumps/wild/rx101_stages_2/weights_stage2/_ckpt_epoch_8.ckpt
+
+train_data:
+  type: src.dataset_v2.HakunaPrefetchedLoader
+  batch_size: 256
+  workers: 8
+  long_side: 512
+  crop_size: 448
+
+val_data:
+  type: src.dataset.HakunaPrefetchedLoader
+  batch_size: 32
+  workers: 4
+  long_side: 512
+
+mixup:
+  type: thunder_hammer.mixup.NoMixUp
+
+scheduler:
+  warmup_epoch: 1
+  warmup: True
+  period: 72
+
+sync_bn: False
+no_bn_weight_decay: False
+
+optimizer:
+  weight_decay: 0.0001
+
+stages:
+#  stage2:
+#    freeze: 0
+#    train_data:
+#      crop_size: 256
+#      batch_size: 64
+#    optimizer:
+#      lr: 0.005
+#    trainer:
+#      max_epochs: 30
+#    scheduler:
+#      warmup_epoch: 0
+#      period: 30
+
+  stage3:
+    freeze: 0
+    train_data:
+      crop_size: 320
+      batch_size: 64
+    optimizer:
+      lr: 0.005
+    trainer:
+      max_epochs: 10
+    scheduler:
+      warmup_epoch: 0
+      period: 10
+
+
+weights:
+  - /mnt/ssd1/learning_dumps/wild/rx101_stages_7/weights_stage2/_ckpt_epoch_4.ckpt
+tta: mirror

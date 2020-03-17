@@ -1,0 +1,26 @@
+n01z3-dl0:
+  data.path: /media/n01z3/437960d6-de76-4a1a-b6cc-7cd6037d75ac/dataset/im_full/imagenet1k
+  dump_path: /mnt/hdd1/learning_dumps/imagenet
+
+n01z3-dl2:
+  data.path: /mnt/ssd1/dataset/imagenet1k
+  dump_path: /mnt/hdd1/learning_dumps/imagenet
+
+n01z3-dl6:
+  data.path: /mnt/ssd1/dataset/imagenet1k
+  dump_path: /mnt/ssd1/learning_dumps/imagenet
+
+mn-dgx01.x5.ru:
+  data.path: /raid/data_share/dataset/imagenet1k
+  dump_path: /raid/data_share/dumps/imagenet
+
+n01z3-work:
+  data.path: /mnt/ssd1/dataset/imagenet1k
+  dump_path: /mnt/hdd1/learning_dumps/imagenet
+
+#"docker": "docker",
+#"n01z3-extreme": "x1",
+#"n01z3-work": "work",
+#"n01z3-dl1": "dl1",
+#"n01z3-dl3": "dl3",
+#"n01z3-dl4": "dl4",

@@ -1,0 +1,89 @@
+version: 7
+name: rx50_stages
+
+model:
+  type: thunder_hammer.model.classification.resnet.resnext50_32x4d
+  pretrained: easygold
+  num_classes: 54
+
+train_data:
+  type: src.dataset_v2.HakunaPrefetchedLoader
+  batch_size: 256
+  workers: 3
+  long_side: 296
+  crop_size: 256
+
+val_data:
+  type: src.dataset.HakunaPrefetchedLoader
+  batch_size: 32
+  workers: 4
+  long_side: 480
+
+mixup:
+  type: thunder_hammer.mixup.NoMixUp
+
+scheduler:
+  warmup_epoch: 1
+  warmup: True
+  period: 72
+
+sync_bn: True
+no_bn_weight_decay: False
+
+optimizer:
+  weight_decay: 0.0001
+
+stages:
+  stage2:
+    freeze: 1
+    train_data:
+      crop_size: 256
+      batch_size: 196
+    optimizer:
+      lr: 0.005
+    trainer:
+      max_epochs: 30
+    scheduler:
+      warmup_epoch: 0
+      period: 30
+
+  stage3:
+    freeze: 1
+    train_data:
+      long_side: 360
+      crop_size: 320
+      batch_size: 64
+    val_data:
+      long_side: 320
+
+    optimizer:
+      lr: 0.005
+    trainer:
+      max_epochs: 10
+    scheduler:
+      warmup_epoch: 0
+      period: 10
+
+  stage4:
+    freeze: 1
+    train_data:
+      long_side: 480
+      crop_size: 416
+      batch_size: 80
+    val_data:
+      long_side: 416
+
+    optimizer:
+      lr: 0.003
+    trainer:
+      max_epochs: 10
+    scheduler:
+      warmup_epoch: 1
+      period: 10
+
+#data_test:
+#  - {type: src.submit.infer_dataset.InferLoader}
+
+weights:
+  - /mnt/ssd1/learning_dumps/wild/rx50_stages_7/weights_stage4/_ckpt_epoch_0.ckpt
+tta: mirror
