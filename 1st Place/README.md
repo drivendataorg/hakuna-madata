@@ -133,7 +133,9 @@ Mean was used for classes representing species and gmean for empty class.
 
 ## What did not work?
 
-![Postprocessing with time priors did not not provide any gains because CNNs easily learn to differentiate day vs night](figures/priors.jpeg)*Postprocessing with time priors was not helpful as CNN learned it already*
+![Postprocessing with time priors did not not provide any gains because CNNs easily learn to differentiate day vs night](figures/priors.jpeg)
+
+*Postprocessing with time priors was not helpful as CNN learned it already*
 
 1. **Heavy augmentation** - it simply takes longer to converge and with such a massive dataset we could not afford it. Besides we found evidence that heavy augmentation such as rotation, warping, zooming or cropping have negative effect because of the noise we introduce with images where animal is present only on the edges of images.
 2. **Adjusting probabilities based on priors** such as day-time / season. For instance, some species are active during the night and others not or have different seasonal behaviours. However, including these priors was not always helpful so we decided to drop it. Convnets learned easily day-night priors.
