@@ -1,0 +1,8 @@
+opencv-python
+pandas
+jupyter
+tensorflow-gpu==2.1.0
+pillow
+matplotlib
+lightgbm
+sklearn
