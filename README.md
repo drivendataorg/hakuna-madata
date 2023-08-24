@@ -6,6 +6,7 @@
 </div>
 
 # Hakuna Ma-data: Identify Wildlife on the Serengeti with AI for Earth
+
 ## Goal of the Competition
 
 Camera traps are an invaluable tool in conservation research, but the sheer amount of data they generate presents a huge barrier to using them effectively. This is where AI can help!
@@ -13,9 +14,10 @@ Camera traps are an invaluable tool in conservation research, but the sheer amou
 In the Hakuna Ma-Data Challenge, participants built models to tag species from a new trove of camera trap imagery provided by the Snapshot Serengeti project. But that's not all! This was a new kind of DrivenData challenge, where competitors packaged everything needed to do inference and submitted that for containerized execution on Azure. By leveraging Microsoft Azure's cloud computing platform and Docker containers, the competition infrastructure moved one step closer to translating participants’ innovation into impact.
 
 ## What's in this Repository
-This repository contains code provided by leading competitors in the [Hakuna Ma-data: Identify Wildlife on the Serengeti with AI for Earth](https://www.drivendata.org/competitions/59/camera-trap-serengeti/) DrivenData challenge.
 
-#### Winning code for other DrivenData competitions is available in the [competition-winners repository](https://github.com/drivendataorg/competition-winners).
+This repository contains code provided by leading competitors in the [Hakuna Ma-data: Identify Wildlife on the Serengeti with AI for Earth](https://www.drivendata.org/competitions/59/camera-trap-serengeti/) DrivenData challenge. Code for all winning solutions are open source under the MIT License.
+
+**Winning code for other DrivenData competitions is available in the [competition-winners repository](https://github.com/drivendataorg/competition-winners).**
 
 ## Winning Submissions
 
@@ -27,6 +29,6 @@ Place |Team or User | Public Score | Private Score | Summary of Model
 
 Additional solution details can be found in the `reports` folder inside the directory for each submission.
 
-#### [Interview with winners](http://drivendata.co/blog/wildlife-serengeti-winners.html)
+**[Interview with winners](https://drivendata.co/blog/wildlife-serengeti-winners.html)**
 
-#### Benchmark Blog Post: ["How to Use Deep Learning to Identify Wildlife"](http://drivendata.co/blog/ai-for-earth-wildlife-detection-benchmark/)
+**Benchmark Blog Post: ["How to Use Deep Learning to Identify Wildlife"](https://drivendata.co/blog/ai-for-earth-wildlife-detection-benchmark/)**
